@@ -11,17 +11,30 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void add(T item){
+        if (size == elements.length) {
+            resize(elements.length * 2);
+        }
         elements[size] = item;
         size++;
     }
 
     @Override
     public void set(int index, T item){
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
         elements[index] = item;
+
     }
 
     @Override
     public void add(int index, T item){
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (size == elements.length) {
+            resize(elements.length * 2);
+        }
         for(int i = size - 1; i <= index; i--){
             elements[i + 1] = elements[i];
         }
@@ -41,6 +54,9 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public T get(int index){
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
         return (T) elements[index];
     }
 
@@ -56,9 +72,13 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void remove(int index){
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
         for(int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
         }
+        elements[size - 1] = null;
         size--;
     }
 
@@ -73,16 +93,20 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     @Override
-    public void sort(){
-        for ( int i = 0; i < size - 1; i++){
+    public void sort() {
+        for (int i = 0; i < size - 1; i++) {
 
-            for ( int j = 0; j < size - i - 1; j++){
-
-
+            for (int j = 0; j < size - i - 1; j++) {
+                if (compareTo((T) elements[j], (T) elements[j + 1]) > 0) {
+                    Object temp = elements[j];
+                    elements[j] = elements[j + 1];
+                    elements[j + 1] = temp;
                 }
+
+
             }
         }
-
+    }
 
     @Override
     public int indexOf(Object object){
@@ -128,5 +152,36 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public int size(){ return size;}
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayListIterator();
+    }
+
+    private void resize(int newSize) {
+        Object[] newElements = new Object[newSize];
+        System.arraycopy(elements, 0, newElements, 0, size);
+        elements = newElements;
+    }
+
+    private int compareTo(T a, T b) {
+        // Assumes that T implements Comparable
+        return ((Comparable<T>) a).compareTo(b);
+    }
+
+    private class ArrayListIterator implements Iterator<T> {
+        private int index;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public T next() {
+            return (T) elements[index++];
+        }
+    }
 }
+
 

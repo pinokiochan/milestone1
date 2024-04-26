@@ -28,17 +28,18 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     @Override
-    public void add(int index, T item){
+    public void add(int index, T element){
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        if (size == elements.length) {
+        if(size == elements.length){
             resize(elements.length * 2);
         }
-        for(int i = size - 1; i <= index; i--){
+        for(int i = size;  i > 0; i--){
             elements[i + 1] = elements[i];
+
         }
-        elements[index] = item;
+        elements[index] = element;
         size++;
     }
 

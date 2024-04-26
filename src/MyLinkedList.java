@@ -56,6 +56,19 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 
     @Override
+    public void addLast(T item) {
+        if (size == 0) {
+            head = new MyNode<T>(item, null, null);
+            tail = head;
+        } else {
+            MyNode<T> newNode = new MyNode<T>(item, null, tail);
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+
+    @Override
     public void add(int index, T element){
 
         if(index == 0){
@@ -151,12 +164,101 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void sort(){
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (compareTo(get(j), get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            T temp = get(minIndex);
+            remove(minIndex);
+            add(i, temp);
+        }
 
     }
 
+    @Override
+    public int indexOf(Object object){
+        MyNode<T> current = head;
+        for (int i = 0; i < size; i++){
+            if(current.element.equals(object)){
+                return i;
+            }
+            current = current.next;
+        }
+        return -1;
+    }
 
+    @Override
+    public int lastIndexOf(Object object){
+        MyNode<T> current = tail;
+        for(int i = size - 1; i >= 0; i--){
+            if(current.element.equals(object)){
+                return i;
+            }
+            current = current.prev;
+        }
+        return -1;
+    }
 
+    @Override
+    public boolean exists(Object object){
+        return indexOf(object) != -1;
+    }
 
+    @Override
+    public Object[] toArray(){
+        Object[] array = new Object[size];
+        MyNode<T> current = head;
+        for(int i = 0; i < size; i++){
+            array[i] = current.element;
+            current = current.next;
 
+        }
+        return array;
 
+    }
+
+    @Override
+    public void clear(){
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    @Override
+    public int size(){
+        return size;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private int compareTo(T a, T b) {
+        // Assumes that T implements Comparable
+        return ((Comparable<T>) a).compareTo(b);
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+        private MyNode<T> current;
+
+        public LinkedListIterator() {
+            current = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T element = current.element;
+            current = current.next;
+            return element;
+        }
+    }
 }

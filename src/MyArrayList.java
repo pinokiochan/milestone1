@@ -9,6 +9,7 @@ public class MyArrayList<T> implements MyList<T> {
         size = 0;
     }
 
+    // to add items
     @Override
     public void add(T item) {
         if (size == elements.length) {
@@ -18,6 +19,7 @@ public class MyArrayList<T> implements MyList<T> {
         size++;
     }
 
+    // to add items by index
     @Override
     public void add(int index, T item) {
         if (index < 0 || index > size) {
@@ -33,6 +35,7 @@ public class MyArrayList<T> implements MyList<T> {
         size++;
     }
 
+    // to set items
     @Override
     public void set(int index, T item) {
         if (index < 0 || index >= size) {
@@ -41,16 +44,19 @@ public class MyArrayList<T> implements MyList<T> {
         elements[index] = item;
     }
 
+    // to add items for start
     @Override
     public void addFirst(T item) {
         add(0, item);
     }
 
+    // to add items for last
     @Override
     public void addLast(T item) {
         add(size, item);
     }
 
+    // to get items
     @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
@@ -59,16 +65,19 @@ public class MyArrayList<T> implements MyList<T> {
         return (T) elements[index];
     }
 
+    // to get items from start
     @Override
     public T getFirst() {
         return get(0);
     }
 
+    // to get items from end
     @Override
     public T getLast() {
         return get(size - 1);
     }
 
+    // to remove item by index
     @Override
     public T remove(int index) {
         if (index < 0 || index >= size) {
@@ -82,18 +91,21 @@ public class MyArrayList<T> implements MyList<T> {
         return null;
     }
 
+    // to remove item from start
     @Override
     public T removeFirst() {
         remove(0);
         return null;
     }
 
+    // to remove item from end
     @Override
     public T removeLast() {
         remove(size - 1);
         return null;
     }
 
+    // to sort list
     @Override
     public void sort() {
         // Bubble sort algorithm
@@ -108,6 +120,7 @@ public class MyArrayList<T> implements MyList<T> {
         }
     }
 
+    // to find index of item
     @Override
     public int indexOf(Object object) {
         for (int i = 0; i < size; i++) {
@@ -118,6 +131,7 @@ public class MyArrayList<T> implements MyList<T> {
         return -1;
     }
 
+    // to find index of item from end
     @Override
     public int lastIndexOf(Object object) {
         for (int i = size - 1; i >= 0; i--) {
@@ -128,11 +142,13 @@ public class MyArrayList<T> implements MyList<T> {
         return -1;
     }
 
+    // to know does exist item
     @Override
     public boolean exists(Object object) {
         return indexOf(object) != -1;
     }
 
+    // to make list
     @Override
     public Object[] toArray() {
         Object[] array = new Object[size];
@@ -142,6 +158,7 @@ public class MyArrayList<T> implements MyList<T> {
         return array;
     }
 
+    // to clear list
     @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
@@ -150,6 +167,7 @@ public class MyArrayList<T> implements MyList<T> {
         size = 0;
     }
 
+    // to get size of list
     @Override
     public int size() {
         return size;

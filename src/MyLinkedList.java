@@ -13,7 +13,9 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
+    // first item
     private MyNode<T> head;
+    // last item
     private MyNode<T> tail;
     private int size;
 
@@ -23,6 +25,7 @@ public class MyLinkedList<T> implements MyList<T> {
         size = 0;
     }
 
+    // to add items
     @Override
     public void add(T item) {
         if (size == 0) {
@@ -36,6 +39,7 @@ public class MyLinkedList<T> implements MyList<T> {
         size++;
     }
 
+    // to add item by index
     @Override
     public void add(int index, T item) {
         if (index < 0 || index > size) {
@@ -57,6 +61,7 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
+    // to set item by index
     @Override
     public void set(int index, T item) {
         if (index < 0 || index >= size) {
@@ -73,6 +78,7 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
+    // to add item for start
     @Override
     public void addFirst(T item) {
         if (size == 0) {
@@ -86,6 +92,7 @@ public class MyLinkedList<T> implements MyList<T> {
         size++;
     }
 
+    // to add item for end
     @Override
     public void addLast(T item) {
         if (size == 0) {
@@ -99,6 +106,7 @@ public class MyLinkedList<T> implements MyList<T> {
         size++;
     }
 
+    // to get item by index
     @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
@@ -111,16 +119,19 @@ public class MyLinkedList<T> implements MyList<T> {
         return current.element;
     }
 
+    // to get item from start
     @Override
     public T getFirst() {
         return get(0);
     }
 
+    // to get item from end
     @Override
     public T getLast() {
         return get(size - 1);
     }
 
+    // to remove item by index
     @Override
     public T remove(int index) {
         if (index < 0 || index >= size) {
@@ -149,18 +160,21 @@ public class MyLinkedList<T> implements MyList<T> {
         return null;
     }
 
+    // to remove item from start
     @Override
     public T removeFirst() {
         remove(0);
         return null;
     }
 
+    // to remove item from end
     @Override
     public T removeLast() {
         remove(size - 1);
         return null;
     }
 
+    // to sort list
     @Override
     public void sort() {
         // Selection sort algorithm
@@ -177,6 +191,7 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
+    // to find index of item
     @Override
     public int indexOf(Object object) {
         MyNode<T> current = head;
@@ -189,6 +204,7 @@ public class MyLinkedList<T> implements MyList<T> {
         return -1;
     }
 
+    // to find index of item from end
     @Override
     public int lastIndexOf(Object object) {
         MyNode<T> current = tail;
@@ -201,11 +217,13 @@ public class MyLinkedList<T> implements MyList<T> {
         return -1;
     }
 
+    // to know does exist item by index
     @Override
     public boolean exists(Object object) {
         return indexOf(object) != -1;
     }
 
+    // to make list
     @Override
     public Object[] toArray() {
         Object[] array = new Object[size];
@@ -217,6 +235,8 @@ public class MyLinkedList<T> implements MyList<T> {
         return array;
     }
 
+
+    // to clear list
     @Override
     public void clear() {
         head = null;
@@ -224,6 +244,7 @@ public class MyLinkedList<T> implements MyList<T> {
         size = 0;
     }
 
+    // to get size of list
     @Override
     public int size() {
         return size;
